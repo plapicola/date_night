@@ -3,7 +3,6 @@ require_relative 'test_helper'
 class BinarySearchTreeTest < Minitest::Test
 
     def test_it_exists
-      skip
       tree = BinarySearchTree.new
 
       assert_instance_of BinarySearchTree, tree
@@ -19,7 +18,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_if_item_is_present
-      skip
       tree = BinarySearchTree.new
       depth = tree.insert(61, "Bill & Ted's Excellent Adventure")
 
@@ -28,7 +26,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_depth
-      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
@@ -36,19 +33,20 @@ class BinarySearchTreeTest < Minitest::Test
 
 
       assert_equal 0, tree.depth_of(61)
-      assert_equal 1, tree.depth_of(61)
+      assert_equal 1, tree.depth_of(16)
       assert_equal 2, tree.depth_of(50)
     end
 
     def test_it_can_determine_max_rated
-      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
       tree.insert(92, "Sharknado 3")
       tree.insert(50, "Hannibal Buress: Animal Furnace")
 
-      assert_equal {"Sharknado 3" => 92}, tree.max
+      expected = {"Sharknado 3"=>92}
+
+      assert_equal expected, tree.max
     end
 
     def test_it_can_determine_lowest_rated
@@ -59,7 +57,9 @@ class BinarySearchTreeTest < Minitest::Test
       tree.insert(92, "Sharknado 3")
       tree.insert(50, "Hannibal Buress: Animal Furnace")
 
-      assert_equal {"Johnny English" => 16}, tree.min
+      expected = {"Johnny English" => 16}
+
+      assert_equal expected, tree.min
     end
 
     def test_it_can_sort_movies
@@ -70,10 +70,10 @@ class BinarySearchTreeTest < Minitest::Test
       tree.insert(92, "Sharknado 3")
       tree.insert(50, "Hannibal Buress: Animal Furnace")
 
-      expected = {"Johnny English" => 16,
-                  "Hannibal Buress: Animal Furnace" => 50,
-                  "Bill & Ted's Excellent Adventure" => 61,
-                  "Sharknado 3" => 92}
+      expected = {"Johnny English"=> 16,
+                  "Hannibal Buress: Animal Furnace"=> 50,
+                  "Bill & Ted's Excellent Adventure"=> 61,
+                  "Sharknado 3"=> 92}
 
       assert_equal expected, tree.sort
     end
