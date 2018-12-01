@@ -96,4 +96,5 @@
 63, Lalaloopsy Girls: Welcome to L.A.L.A. Prep School
 72, Serenity
 13, 9 Muses of Star Empire
-39, A Place on Earth 20, All That Glitters
+39, A Place on Earth
+20, All That Glitters
