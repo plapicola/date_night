@@ -112,6 +112,20 @@ class BinarySearchTree
     return current.information
   end
 
+  def sort
+    sorted = []
+    get_sorted(@root, sorted)
+  end
+
+  def get_sorted(current, collection)
+    if current == nil
+      return collection
+    end
+
+    get_sorted(current.left, collection)
+    collection << current.information
+    get_sorted(current.right, collection)
+  end
 
 
 end

@@ -62,27 +62,18 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_sort_movies
-      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
       tree.insert(92, "Sharknado 3")
       tree.insert(50, "Hannibal Buress: Animal Furnace")
 
-      expected = {"Johnny English"=> 16,
-                  "Hannibal Buress: Animal Furnace"=> 50,
-                  "Bill & Ted's Excellent Adventure"=> 61,
-                  "Sharknado 3"=> 92}
+      expected = [{"Johnny English"=> 16},
+                  {"Hannibal Buress: Animal Furnace"=> 50},
+                  {"Bill & Ted's Excellent Adventure"=> 61},
+                  {"Sharknado 3"=> 92}]
 
       assert_equal expected, tree.sort
-    end
-
-    def test_it_can_load_movies_from_file
-      skip
-      tree = BinarySearchTree.new
-      count = tree.load 'movies.txt'
-
-      assert_equal count, 100
     end
 
     def test_it_can_count_leaves
@@ -113,6 +104,13 @@ class BinarySearchTreeTest < Minitest::Test
       assert_equal tree.height, 4
     end
 
+    def test_it_can_load_movies_from_file
+      skip
+      tree = BinarySearchTree.new
+      count = tree.load 'movies.txt'
+
+      assert_equal count, 100
+    end
     def test_it_can_delete
       skip
       tree = BinarySearchTree.new
