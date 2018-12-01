@@ -101,16 +101,16 @@ class BinarySearchTree
     return find_max(current.right) unless current.left == nil
     return current.information
   end
-  #
-  # def min
-  #   return find_min(@root) unless @root == nil
-  #   return nil
-  # end
-  #
-  # def find_min(current)
-  #   @return find_min(current.left) unless current.left == nil
-  #   return current.rating
-  # end
+
+  def min
+    return find_min(@root) unless @root == nil
+    return nil
+  end
+
+  def find_min(current)
+    return find_min(current.left) unless current.left == nil
+    return current.information
+  end
 
 
 

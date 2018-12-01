@@ -50,7 +50,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_lowest_rated
-      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
