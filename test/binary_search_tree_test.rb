@@ -3,12 +3,14 @@ require_relative 'test_helper'
 class BinarySearchTreeTest < Minitest::Test
 
     def test_it_exists
+      skip
       tree = BinarySearchTree.new
 
       assert_instance_of BinarySearchTree, tree
     end
 
     def test_it_can_add_new_elements_and_depth_is_returned
+      skip
       tree = BinarySearchTree.new
       depth = tree.insert(61, "Bill & Ted's Excellent Adventure")
 
@@ -17,6 +19,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_if_item_is_present
+      skip
       tree = BinarySearchTree.new
       depth = tree.insert(61, "Bill & Ted's Excellent Adventure")
 
@@ -25,6 +28,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_depth
+      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
@@ -37,6 +41,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_max_rated
+      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
@@ -47,6 +52,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_determine_lowest_rated
+      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
@@ -57,6 +63,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_sort_movies
+      skip
       tree = BinarySearchTree.new
       tree.insert(61, "Bill & Ted's Excellent Adventure")
       tree.insert(16, "Johnny English")
@@ -72,6 +79,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_load_movies_from_file
+      skip
       tree = BinarySearchTree.new
       count = tree.load 'movies.txt'
 
@@ -79,6 +87,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_count_leaves
+      skip
       tree = BinarySearchTree.new
       tree.insert(98, "Animals United")
       tree.insert(58, "Armageddon")
@@ -92,6 +101,7 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_has_a_height
+      skip
       tree = BinarySearchTree.new
       tree.insert(98, "Animals United")
       tree.insert(58, "Armageddon")
@@ -105,11 +115,39 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_delete
-        # Add me
+      skip
+      tree = BinarySearchTree.new
+      tree.insert(98, "Animals United")
+      tree.insert(58, "Armageddon")
+      tree.insert(36, "Bill & Ted's Bogus Journey")
+      tree.insert(93, "Bill & Ted's Excellent Adventure")
+      tree.insert(86, "Charlie's Angels")
+      tree.insert(38, "Charlie's Country")
+      tree.insert(69, "Collateral Damage")
+
+      assert tree.include?(86)
+      tree.delete(86)
+      refute tree.include?(86)
+      assert tree.include(58)
     end
 
     def test_it_can_determine_health
-        # Add me
+      skip
+      tree = BinarySearchTree.new
+      tree.insert(98, "Animals United")
+      tree.insert(58, "Armageddon")
+      tree.insert(36, "Bill & Ted's Bogus Journey")
+      tree.insert(93, "Bill & Ted's Excellent Adventure")
+      tree.insert(86, "Charlie's Angels")
+      tree.insert(38, "Charlie's Country")
+      tree.insert(69, "Collateral Damage")
+
+      expected_at_depth_0 = [[98, 7, 100]]
+
+      expected_at_depth_2 = [[36, 2, (2.to_f / 7 * 100).to_i]]
+      expected_at_depth_2 << [93, 3, (3.to_f / 7 * 100).to_i]
+
+      assert_equal expected_at_depth_2, tree.health(2)
     end
 
 end
