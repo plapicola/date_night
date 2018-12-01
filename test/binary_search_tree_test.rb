@@ -90,7 +90,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_has_a_height
-      skip
       tree = BinarySearchTree.new
       tree.insert(98, "Animals United")
       tree.insert(58, "Armageddon")

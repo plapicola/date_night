@@ -142,4 +142,26 @@ class BinarySearchTree
     return count_leaves(current.left) + count_leaves(current.right)
   end
 
+  def height
+    if @root == 0
+      return nil
+    end
+
+    find_height(@root)
+  end
+
+  def find_height(current)
+    # Define initial values to ensure later if functions
+    left_depth = 0
+    right_depth = 0
+    left_depth = find_height(current.left) + 1 unless current.left == nil
+    right_depth = find_height(current.right) + 1 unless current.right == nil
+
+    if left_depth > right_depth
+      return left_depth
+    end
+    return right_depth
+  end
+
+
 end
