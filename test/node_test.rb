@@ -49,4 +49,13 @@ class NodeTest < Minitest::Test
     assert_equal 2, node.children
   end
 
+  def test_it_knows_if_it_is_a_leaf
+    node = Node.new(10, "Test")
+    node_left = Node.new(8, "Left")
+    node.left = node_left
+
+    refute node.is_leaf?
+    assert node_left.is_leaf?
+  end
+
 end

@@ -12,6 +12,10 @@ class Node
     @right = nil
   end
 
+  def is_leaf?
+    return @left == nil && @right == nil
+  end
+
   def children
     children = 1
     if @left != nil
@@ -21,12 +25,6 @@ class Node
       children += @right.children
     end
     return children
-  end
-
-  attr_reader :hello
-
-  def hello
-    return @hello
   end
 
   def information
