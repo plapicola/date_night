@@ -127,5 +127,19 @@ class BinarySearchTree
     get_sorted(current.right, collection)
   end
 
+  def leaves
+    return count_leaves(@root)
+  end
+
+  def count_leaves(current)
+    if current == nil
+      return 0
+    end
+    if current.is_leaf?
+      return 1
+    end
+
+    return count_leaves(current.left) + count_leaves(current.right)
+  end
 
 end
