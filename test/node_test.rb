@@ -15,6 +15,14 @@ class NodeTest < Minitest::Test
     assert_equal "Test", node.title
   end
 
+  def test_it_can_return_a_score_as_a_hash
+    node = Node.new(10, "Test")
+
+    expected = {"Test"=>10}
+
+    assert_equal expected, node.information
+  end
+
   def test_it_has_a_left_reference
     node = Node.new(10, "Test")
     left_node = Node.new(8, "Left")

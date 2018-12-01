@@ -22,4 +22,14 @@ class Node
     end
     return children
   end
+
+  attr_reader :hello
+
+  def hello
+    return @hello
+  end
+
+  def information
+    return {@title=>@rating}
+  end
 end
