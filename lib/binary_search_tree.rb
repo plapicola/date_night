@@ -30,7 +30,7 @@ class BinarySearchTree
         current.right = new_node
         return 1
       end
-    else current.rating > new_node.rating
+    elsif current.rating > new_node.rating
       if current.left != nil
         return 1 + insert_node(current.left, new_node)
       else
@@ -182,8 +182,8 @@ class BinarySearchTree
         found_node = @root
         @root = nil
       end
-      reinsert_children(found_node)
       @count -= 1
+      reinsert_children(found_node)
       return found_node.rating
     else
       return nil
@@ -211,23 +211,36 @@ class BinarySearchTree
   end
 
   def reinsert_children(current)
-    insert_node(@root, current.left) unless current.left == nil
-    insert_node(@root, current.right) unless current.right == nil
-
-    if current.left != nil && current.right != nil
-      if current.right.children > current.left.children
-        reinsert_children(current.right)
-        reinsert_children(current.left)
-      else
-        reinsert_children(current.left)
-        reinsert_children(current.right)
-      end
-    elsif current.right != nil
-      reinsert_children(current.right)
-    elsif current.left != nil
-      reinsert_children(current.left)
+    # Get sorted array for left and right of current
+    # Insert by making new node based on binary search of array
+    left = []
+    right = []
+    get_sorted(current.left, left)
+    get_sorted(current.right, right)
+    right.each do |pair| # Join left and right as arrays
+      left << pair
     end
+    if @root == nil && @count != 0
+      midpoint = (0 + left.length - 1) / 2
+      rating = left[midpoint].values.first
+      title = left[midpoint].keys.first
+      @root = Node.new(rating, title)
+    end
+    binary_search_insert(left, 0, left.length - 1) unless left.length == 0
   end
+
+  def binary_search_insert(data, left, right)
+    if left > right
+      return
+    end
+    midpoint = (left + right) / 2
+    rating = data[midpoint].values.first
+    title = data[midpoint].keys.first
+    insert_node(@root, Node.new(rating, title))
+    binary_search_insert(data, left, midpoint - 1)
+    binary_search_insert(data, midpoint + 1, right)
+  end
+
 
 
   #   # if current == nil || current.value == value

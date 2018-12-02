@@ -117,12 +117,21 @@ class BinarySearchTreeTest < Minitest::Test
       tree.insert(38, "Charlie's Country")
       tree.insert(69, "Collateral Damage")
 
-      assert tree.include?(86)
-      tree.delete(86)
-      refute tree.include?(86)
+      assert tree.include?(98)
+      tree.delete(98)
+      refute tree.include?(98)
       assert tree.include?(58)
     end
 
+    def test_it_can_delete_single_node_tree
+      tree = BinarySearchTree.new
+      tree.insert(98, "Animals United")
+
+      assert tree.include?(98)
+      tree.delete(98)
+      refute tree.include?(98)
+    end
+        
     def test_it_can_determine_health
       skip
       tree = BinarySearchTree.new
