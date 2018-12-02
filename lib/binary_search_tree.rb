@@ -142,7 +142,7 @@ class BinarySearchTree
   end
 
   def height
-    if @root == 0
+    if @root == nil
       return nil
     end
 

@@ -11,9 +11,13 @@ class BinarySearchTreeTest < Minitest::Test
     def test_it_can_add_new_elements_and_depth_is_returned
       tree = BinarySearchTree.new
       depth = tree.insert(61, "Bill & Ted's Excellent Adventure")
+      depth_2 = tree.insert(50, "Hannibal Buress: Animal Furnace")
+      depth_3 = tree.insert(50, "Hannibal Buress: Animal Furnace")
 
       assert tree.include?(61)
       assert_equal 0, depth
+      assert_equal 1, depth_2
+      assert_nil depth_3
     end
 
     def test_it_can_determine_if_item_is_present
@@ -34,6 +38,7 @@ class BinarySearchTreeTest < Minitest::Test
       assert_equal 0, tree.depth_of(61)
       assert_equal 1, tree.depth_of(16)
       assert_equal 2, tree.depth_of(50)
+      assert_nil tree.depth_of(99)
     end
 
     def test_it_can_determine_max_rated
@@ -90,6 +95,7 @@ class BinarySearchTreeTest < Minitest::Test
 
     def test_it_has_a_height
       tree = BinarySearchTree.new
+      assert_nil tree.height
       tree.insert(98, "Animals United")
       tree.insert(58, "Armageddon")
       tree.insert(36, "Bill & Ted's Bogus Journey")
@@ -107,6 +113,7 @@ class BinarySearchTreeTest < Minitest::Test
 
       assert_equal count, 100
     end
+
     def test_it_can_delete
       tree = BinarySearchTree.new
       tree.insert(98, "Animals United")
@@ -118,9 +125,14 @@ class BinarySearchTreeTest < Minitest::Test
       tree.insert(69, "Collateral Damage")
 
       assert tree.include?(98)
-      tree.delete(58)
-      refute tree.include?(58)
-      assert tree.include?(93)
+      tree.delete(98)
+      refute tree.include?(98)
+      assert tree.include?(86)
+      tree.delete(86)
+      refute tree.include?(86)
+      assert tree.include?(36)
+      tree.delete(36)
+      refute tree.include?(36)
     end
 
     def test_it_can_delete_single_node_tree
@@ -149,5 +161,19 @@ class BinarySearchTreeTest < Minitest::Test
 
       assert_equal expected_at_depth_2, tree.health(2)
     end
+
+    def test_full_tree_can_delete
+      tree = BinarySearchTree.new
+      tree.load("movies.txt")
+
+      assert tree.include?(75)
+      tree.delete(75)
+      assert tree.include?(71)
+      refute tree.include?(75)
+
+      tree.delete(7)
+      refute tree.include?(7)
+    end
+
 
 end
