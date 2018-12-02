@@ -1,4 +1,5 @@
 require_relative 'node'
+require 'pry'
 
 class BinarySearchTree
 
@@ -161,6 +162,18 @@ class BinarySearchTree
       return left_depth
     end
     return right_depth
+  end
+
+  def load(filename)
+    count_loaded = 0
+    movies = IO.readlines(filename)
+    movies.each do |movie|
+      movie = movie.chomp #Remove newline character
+      movie_info = movie.split(", ")
+      insert(movie_info[0].to_i, movie_info[1])
+      count_loaded += 1
+    end
+    return count_loaded
   end
 
 

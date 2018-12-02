@@ -103,7 +103,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_load_movies_from_file
-      skip
       tree = BinarySearchTree.new
       count = tree.load 'movies.txt'
 
