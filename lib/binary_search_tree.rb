@@ -244,9 +244,11 @@ class BinarySearchTree
   end
 
   def health(depth)
-    tree_health = []
     nodes = []
     nodes_at_depth(nodes, depth, @root, 0)
+    tree_health = nodes.map do |node|
+      [node.rating, node.children, (node.children * 100.0 / @count).to_i]
+    end
   end
 
   def nodes_at_depth(nodes, depth, current_node, current_depth)
