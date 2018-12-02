@@ -50,9 +50,7 @@ class BinarySearchTree
 
   def has_node_in_tree? (current, rating)
     # Found score
-    if current.rating == rating
-      return true
-    end
+    return true if current.rating == rating
 
     #
     if rating < current.rating
@@ -175,6 +173,72 @@ class BinarySearchTree
     end
     return count_loaded
   end
+
+  def delete(value)
+    if include?(value)
+      if @root.rating != value
+        found_node = remove_branch(@root, value)
+      else
+        found_node = @root
+        @root = nil
+      end
+      reinsert_children(found_node)
+      @count -= 1
+      return found_node.rating
+    else
+      return nil
+    end
+  end
+
+  def remove_branch(current, value)
+    if current.rating < value
+      if current.right.rating == value
+        temp = current.right
+        current.right = nil
+        return temp
+      else
+        return remove_branch(current.right, value)
+      end
+    else
+      if current.left.rating == value
+        temp = current.left
+        current.left = nil
+        return temp
+      else
+        return remove_branch(current.left, value)
+      end
+    end
+  end
+
+  def reinsert_children(current)
+    insert_node(@root, current.left) unless current.left == nil
+    insert_node(@root, current.right) unless current.right == nil
+
+    if current.left != nil && current.right != nil
+      if current.right.children > current.left.children
+        reinsert_children(current.right)
+        reinsert_children(current.left)
+      else
+        reinsert_children(current.left)
+        reinsert_children(current.right)
+      end
+    elsif current.right != nil
+      reinsert_children(current.right)
+    elsif current.left != nil
+      reinsert_children(current.left)
+    end
+  end
+
+
+  #   # if current == nil || current.value == value
+  #   #   return current
+  #   # end
+  #
+  #   # if current.value > value
+  #   #   return find_node(current.left, value)
+  #   # end
+  #   # return find_node(current.right, value)
+  # end
 
 
 end

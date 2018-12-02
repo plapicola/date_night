@@ -9,7 +9,6 @@ class BinarySearchTreeTest < Minitest::Test
     end
 
     def test_it_can_add_new_elements_and_depth_is_returned
-      skip
       tree = BinarySearchTree.new
       depth = tree.insert(61, "Bill & Ted's Excellent Adventure")
 
@@ -109,7 +108,6 @@ class BinarySearchTreeTest < Minitest::Test
       assert_equal count, 100
     end
     def test_it_can_delete
-      skip
       tree = BinarySearchTree.new
       tree.insert(98, "Animals United")
       tree.insert(58, "Armageddon")
@@ -122,7 +120,7 @@ class BinarySearchTreeTest < Minitest::Test
       assert tree.include?(86)
       tree.delete(86)
       refute tree.include?(86)
-      assert tree.include(58)
+      assert tree.include?(58)
     end
 
     def test_it_can_determine_health
