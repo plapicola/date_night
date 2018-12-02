@@ -174,7 +174,7 @@ class BinarySearchTree
     return count_loaded
   end
 
-  def delete(value)
+  def delete(value) # Refactor me
     if include?(value)
       if @root.rating != value
         found_node = remove_branch(@root, value)
@@ -190,7 +190,7 @@ class BinarySearchTree
     end
   end
 
-  def remove_branch(current, value)
+  def remove_branch(current, value) # Refactor me
     if current.rating < value
       if current.right.rating == value
         temp = current.right
@@ -243,17 +243,26 @@ class BinarySearchTree
     binary_search_insert(data, midpoint + 1, right)
   end
 
+  def health(depth)
+    tree_health = []
+    nodes = []
+    nodes_at_depth(nodes, depth, @root, 0)
+  end
+
+  def nodes_at_depth(nodes, depth, current_node, current_depth)
+    nodes << current_node if depth == current_depth
+    if current_node.left != nil
+      nodes_at_depth(nodes, depth, current_node.left, current_depth + 1)
+    end
+    if current_node.right != nil
+      nodes_at_depth(nodes, depth, current_node.right, current_depth + 1)
+    end
+  end
 
 
-  #   # if current == nil || current.value == value
-  #   #   return current
-  #   # end
-  #
-  #   # if current.value > value
-  #   #   return find_node(current.left, value)
-  #   # end
-  #   # return find_node(current.right, value)
-  # end
+
+  # Would Like: Rebalance Tree Method using Reinsert Children
+
 
 
 end
