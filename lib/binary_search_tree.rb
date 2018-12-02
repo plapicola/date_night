@@ -211,28 +211,30 @@ class BinarySearchTree
   end
 
   def reinsert_children(current)
-    # Get sorted array for left and right of current
-    # Insert by making new node based on binary search of array
+    data = get_array_of_children(current)
+    if @root == nil && @count != 0
+      generate_new_root(data)
+    end
+    binary_search_insert(data, 0, data.length - 1) unless data.length == 0
+  end
+
+  def get_array_of_children(deleted_node)
     left = []
     right = []
-    get_sorted(current.left, left)
-    get_sorted(current.right, right)
-    right.each do |pair| # Join left and right as arrays
-      left << pair
-    end
-    if @root == nil && @count != 0
-      midpoint = (0 + left.length - 1) / 2
-      rating = left[midpoint].values.first
-      title = left[midpoint].keys.first
-      @root = Node.new(rating, title)
-    end
-    binary_search_insert(left, 0, left.length - 1) unless left.length == 0
+    get_sorted(deleted_node.left, left)
+    get_sorted(deleted_node.right, right)
+    left + right
+  end
+
+  def generate_new_root(data)
+    midpoint = (0 + data.length - 1) / 2
+    rating = data[midpoint].values.first
+    title = data[midpoint].keys.first
+    @root = Node.new(rating, title)
   end
 
   def binary_search_insert(data, left, right)
-    if left > right
-      return
-    end
+    return if left > right
     midpoint = (left + right) / 2
     rating = data[midpoint].values.first
     title = data[midpoint].keys.first

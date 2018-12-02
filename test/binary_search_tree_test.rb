@@ -118,9 +118,9 @@ class BinarySearchTreeTest < Minitest::Test
       tree.insert(69, "Collateral Damage")
 
       assert tree.include?(98)
-      tree.delete(98)
-      refute tree.include?(98)
-      assert tree.include?(58)
+      tree.delete(58)
+      refute tree.include?(58)
+      assert tree.include?(93)
     end
 
     def test_it_can_delete_single_node_tree
@@ -131,7 +131,7 @@ class BinarySearchTreeTest < Minitest::Test
       tree.delete(98)
       refute tree.include?(98)
     end
-        
+
     def test_it_can_determine_health
       skip
       tree = BinarySearchTree.new
