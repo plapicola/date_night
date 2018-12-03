@@ -1,5 +1,4 @@
 require_relative 'node'
-require 'pry'
 
 class BinarySearchTree
 
@@ -9,7 +8,7 @@ class BinarySearchTree
   end
 
   def insert(rating, title)
-    if !include?(rating)
+    if !include?(rating) # Unsure if uniqueness was a garuntee in dataset
       new_node = Node.new(rating, title)
       @count += 1
       if @root == nil
@@ -23,50 +22,30 @@ class BinarySearchTree
 
   def insert_node(current, new_node)
     if current.rating < new_node.rating
-      if current.right != nil
-        # Return 1 + to capture depth
-        return 1 + insert_node(current.right, new_node)
-      else
-        current.right = new_node
-        return 1
-      end
+      return 1 + insert_node(current.right, new_node) unless current.right == nil
+      current.right = new_node
+      return 1
     elsif current.rating > new_node.rating
-      if current.left != nil
-        return 1 + insert_node(current.left, new_node)
-      else
-        current.left = new_node
-        return 1
-      end
+      return 1 + insert_node(current.left, new_node) unless current.left == nil
+      current.left = new_node
+      return 1
     end
   end
 
   def include?(rating)
-    if @root == nil
-      return false
-    end
-
+    return false if @root == nil
     return has_node_in_tree?(@root, rating)
   end
 
   def has_node_in_tree? (current, rating)
-    # Found score
+    # Found score, end recursion
     return true if current.rating == rating
 
-    #
-    if rating < current.rating
-      if current.left != nil
-        return has_node_in_tree?(current.left, rating)
-      else
-        return false
-      end
-    elsif rating > current.rating
-      if current.right != nil
-        return has_node_in_tree?(current.right, rating)
-      else
-        return false
-      end
-    else
-      # Not found
+    if rating < current.rating && current.left != nil
+      return has_node_in_tree?(current.left, rating)
+    elsif rating > current.rating && current.right != nil
+      return has_node_in_tree?(current.right, rating)
+    else # Not in tree
       return false
     end
   end
@@ -74,7 +53,7 @@ class BinarySearchTree
   def depth_of(rating)
     if include?(rating)
       return depth_of_node(@root, rating)
-    else
+    else # not in tree
       return nil
     end
   end
@@ -86,7 +65,7 @@ class BinarySearchTree
 
     if rating < current.rating
       return 1 + depth_of_node(current.left, rating)
-    else
+    else # rating > current.rating
       return 1 + depth_of_node(current.right, rating)
     end
   end
@@ -97,7 +76,7 @@ class BinarySearchTree
   end
 
   def find_max(current)
-    return find_max(current.right) unless current.left == nil
+    return find_max(current.right) unless current.right == nil
     return current.information
   end
 
@@ -174,23 +153,28 @@ class BinarySearchTree
     return count_loaded
   end
 
-  def delete(value) # Refactor me
+  def delete(value)
     if include?(value)
-      if @root.rating != value
-        found_node = remove_branch(@root, value)
-      else
-        found_node = @root
-        @root = nil
-      end
-      @count -= 1
-      reinsert_children(found_node)
-      return found_node.rating
+      deleted_node = get_deleted_node(value)
+      reinsert_children(deleted_node)
+      return deleted_node.rating
     else
       return nil
     end
   end
 
-  def remove_branch(current, value) # Refactor me
+  def get_deleted_node(value)
+    if @root.rating != value
+      found_node = remove_branch(@root, value)
+    else
+      found_node = @root
+      @root = nil
+    end
+    @count -= 1
+    return found_node
+  end
+
+  def remove_branch(current, value)
     if current.rating < value
       if current.right.rating == value
         temp = current.right
