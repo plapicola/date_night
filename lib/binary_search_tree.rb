@@ -244,10 +244,8 @@ class BinarySearchTree
       nodes_at_depth(nodes, depth, current_node.right, current_depth + 1)
     end
   end
-
-
-
   # Would Like: Rebalance Tree Method using Reinsert Children
+  # Rework delete to use swap method
 
 
 
